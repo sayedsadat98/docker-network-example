@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  webserver:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    networks:
+      - my_network
+  client:
+    build:
+      context: ./alpine
+      dockerfile: Dockerfile
+    networks:
+      - my_network
+    depends_on:
+      - webserver
+
+networks:
+  my_network:
+    driver: bridge
+  
